@@ -4,12 +4,14 @@ const controller = require('./controller')
 const response = require('../../network/response')
 
 router.get('/', (req, res) => {
-  console.log(req.headers);
-  res.header({
-      "custom-header": "Any value"
-  });
-  response.success(req, res, 'Lista de mensajes');
+  controller.getMessages()
+  .then(messageList => {
+    response.success(req, res, messageList, 200);
   })
+  .catch(err => {
+    response.error(req, res, 'Unexpected error', 500, err);
+  });
+})
 
 router.post('/', (req, res) => {
   const { user, message } = req.body;
@@ -17,6 +19,7 @@ router.post('/', (req, res) => {
   .then((fullMessage) => {
     response.success(req, res, fullMessage, 201)
   }).catch(err => {
+    console.error(err)
     response.error(req, res, 'Información invalida', 400, 'Error en el controlador');
   });
 })
