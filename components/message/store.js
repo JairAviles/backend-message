@@ -2,22 +2,26 @@ const db = require('mongoose');
 const Model = require('./model')
 
 db.Promise = global.Promise;
+
+// Add your own Mongodb String chaing connection ;)
 db.connect('', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 console.log('[db] Conectado con exito')
 
-const list = [];
-
 const addMessage = (message) => {
-  // list.push(message);
   const myMessage = new Model(message);
   myMessage.save();
 }
 
-const getMessages = async () => {
-  const messages = await Model.find();
+const getMessages = async (filterUser) => {
+  let filter = {}
+  if (filterUser) {
+    filter = { user: filterUser };
+  }
+
+  const messages = await Model.find(filter);
   return messages;
 }
 

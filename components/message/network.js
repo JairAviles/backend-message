@@ -4,7 +4,8 @@ const controller = require('./controller')
 const response = require('../../network/response')
 
 router.get('/', (req, res) => {
-  controller.getMessages()
+  const filterUser = req.query.user || '';
+  controller.getMessages(filterUser)
   .then(messageList => {
     response.success(req, res, messageList, 200);
   })
