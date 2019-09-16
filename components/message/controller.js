@@ -10,7 +10,7 @@ const addMessage = (user, message) => {
       const fullMessage = {
         user,
         message,
-        date: new Date()
+        created_date: new Date()
       };
       store.add(fullMessage);
       resolve(fullMessage);
@@ -24,7 +24,19 @@ const getMessages = () => {
   })
 }
 
+const updateMessage = (id, message) => {
+  return new Promise(async (resolve, reject) => {
+    if(!id || !message) {
+      reject('Invalid data');
+      return false;
+    }
+    const res = await store.update(id, message);
+    resolve(res);
+  })
+}
+
 module.exports = { 
   addMessage,
-  getMessages
+  getMessages,
+  updateMessage
 }

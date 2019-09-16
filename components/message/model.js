@@ -7,7 +7,8 @@ const mySchema = new Schema({
     type: String,
     required: true
   },
-  date: Date
+  created_date: Date,
+  updated_date: Date
 });
 
 const model = mongoose.model('Message', mySchema);

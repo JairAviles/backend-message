@@ -24,10 +24,18 @@ router.post('/', (req, res) => {
   });
 })
 
+router.patch('/:id', (req, res) => {
+  console.log(req.params.id);
+  controller.updateMessage(req.params.id, req.body.message)
+    .then((data)=> {
+      response.success(req, res, data, 200);
+    })
+    .catch(err => {
+      response.error(req, res, 'Error interno', 500, err)
+    });
+})
+
 router.delete('/', (req, res) => {
-  console.log(req.body);
-  console.log(req.query);
-  // res.status(200).send({error: '', body: 'Eliminado correctamente'});
   response.success(req, res, 'Eliminado  correctamente');
 })
 
