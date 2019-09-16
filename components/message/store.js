@@ -1,14 +1,4 @@
-const db = require('mongoose');
 const Model = require('./model')
-
-db.Promise = global.Promise;
-
-// Add your own Mongodb String chaing connection ;)
-db.connect('', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-console.log('[db] Conectado con exito')
 
 const addMessage = (message) => {
   const myMessage = new Model(message);

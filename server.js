@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser')
-
+const db = require('./db')
 const router = require('./network/routes')
 
+// Add your own Mongodb String chaing connection ;)
+db('');
 const app = express();
 
 app.use(bodyParser.json());
