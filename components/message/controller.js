@@ -35,8 +35,26 @@ const updateMessage = (id, message) => {
   })
 }
 
+const deleteMessage = (id) => {
+  return new Promise((resolve, reject) => {
+    if (!id) {
+      reject('Invalid id');
+      return false;
+    }
+
+    store.remove(id)
+    .then(() => {
+      resolve();
+    })
+    .catch(e => {
+      reject(e);
+    });
+  })
+}
+
 module.exports = { 
   addMessage,
+  deleteMessage,
   getMessages,
   updateMessage
 }
