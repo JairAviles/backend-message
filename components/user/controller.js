@@ -13,9 +13,7 @@ const addUser = (name) => {
 }
 
 const getUsers = () => {
-  return new Promise((resolve, reject) => {
-    resolve(store.list())
-  })
+  return store.list()
 }
 
 module.exports = {

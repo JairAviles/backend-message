@@ -6,8 +6,7 @@ const addUser = (user) => {
 }
 
 const getUsers = async () => {
-    const users = await Model.find();
-    return users
+    return Model.find();
 }
 
 module.exports = {
