@@ -5,7 +5,7 @@ const addMessage = (message) => {
   myMessage.save();
 }
 
-const getMessages = async (filterUser) => {
+const listMessages = async (filterUser) => {
   return new Promise((resolve, reject) => {
     let filter = {}
     if (filterUser) {
@@ -40,7 +40,7 @@ const updateText = async (id, message) => {
 
 module.exports = {
   add: addMessage,
-  list: getMessages,
+  list: listMessages,
   remove: removeMessage,
   update: updateText,
 }

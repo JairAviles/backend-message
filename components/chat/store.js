@@ -5,11 +5,28 @@ const addChat = (chat) => {
   return newChat.save();
 }
 
-const getChats = async () => {
-  return Model.find();
+const listChats = async (userId) => {
+  return new Promise((resolve, reject) => {
+    let filter = {}
+    if (userId) {
+      filter = {
+        users: userId
+      }
+    }
+    
+     Model.find(filter)
+      .populate('users')
+      .exec((error, populated) => {
+        if (error) {
+          reject(error);
+          return false;
+        }
+        resolve(populated);
+      });
+  })
 }
 
 module.exports = {
   add: addChat,
-  list: getChats
+  list: listChats
 }

@@ -1,13 +1,14 @@
 const store = require('./store')
 
-const addMessage = (user, message) => {
+const addMessage = (chat, user, message) => {
   return new Promise((resolve, reject) => {
-    if (!user || !message) {
+    if (!chat || !user || !message) {
       console.error('[messageController] Invalid input data')
       reject('Invalida input data!');
       return false
     } else {
       const fullMessage = {
+        chat,
         user,
         message,
         created_date: new Date()
@@ -18,9 +19,9 @@ const addMessage = (user, message) => {
   })
 }
 
-const getMessages = (filterUser) => {
+const getMessages = (filterMessages) => {
   return new Promise((resolve, reject) => {
-    resolve(store.list(filterUser));
+    resolve(store.list(filterMessages));
   })
 }
 
