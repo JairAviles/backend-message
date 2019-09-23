@@ -1,18 +1,23 @@
 const express = require('express');
+const app = express();
+const server = require('http').Server(app)
+
 const bodyParser = require('body-parser')
+const socket = require('./socket')
 const db = require('./db')
 const router = require('./network/routes')
 
-// Add your own Mongodb String chaing connection ;)
+// Define your own Mongodb String chaing connection ;)
 db('');
-const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+socket.connect(server);
 router(app);
 
 app.use('/app', express.static('public'));
 
-app.listen(3000);
-console.log('Application is listening in http://localhost:3000')
+server.listen(3000, () => {
+  console.log('Application is listening in http://localhost:3000')
+});
