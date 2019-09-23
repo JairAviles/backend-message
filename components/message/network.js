@@ -6,7 +6,7 @@ const response = require('../../network/response')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads/')
+    cb(null, 'public/files/')
   },
   filename: (req, file, cb) => {
     cb (null, new Date().toISOString() + file.originalname)
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 
 router.post('/', upload.single('file'), (req, res) => {
   const { chat, user, message } = req.body;
-  controller.addMessage(chat ,user, message)
+  controller.addMessage(chat ,user, message, req.file)
   .then((fullMessage) => {
     response.success(req, res, fullMessage, 201)
   }).catch(err => {

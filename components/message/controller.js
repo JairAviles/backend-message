@@ -1,17 +1,23 @@
 const store = require('./store')
 
-const addMessage = (chat, user, message) => {
+const addMessage = (chat, user, message, file) => {
   return new Promise((resolve, reject) => {
     if (!chat || !user || !message) {
       console.error('[messageController] Invalid input data')
       reject('Invalida input data!');
       return false
     } else {
+      let fileUrl = ''
+      if (file) {
+        fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+      }
+
       const fullMessage = {
         chat,
         user,
         message,
-        created_date: new Date()
+        created_date: new Date(),
+        file: fileUrl
       };
       store.add(fullMessage);
       resolve(fullMessage);
