@@ -3,10 +3,11 @@ const multer = require('multer')
 const router = express.Router();
 const controller = require('./controller')
 const response = require('../../network/response')
+const config = require('../../config')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/files/')
+    cb(null, `public/${config.filesRoute}/`)
   },
   filename: (req, file, cb) => {
     cb (null, new Date().toISOString() + file.originalname)
